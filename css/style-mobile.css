@@ -285,4 +285,12 @@
         font-family: arima-madurai;
         font-size: 14px;
     }
+
+    #loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 100vh;
+    }
 }

@@ -7,8 +7,12 @@
     <title>Deyse & Ricardo</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preload" as="font" href="/css/fonts/Allura-Regular.ttf">
+    <link rel="preload" as="font" href="/css/fonts/arima-madurai.light.ttf">
+    <link rel="preload" as="font" href="/css/fonts/Nickainley.ttf">
     <link rel="stylesheet" type="text/css" href="./css/style-pc.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="./css/style-mobile.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="./css/style-loading.css" media="screen"/>
 </head>
 <body>
     <%
@@ -17,7 +21,7 @@
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
     %>
-    <section id="main">
+    <section style="display: none;" id="main">
         <div id="flores-superior">
             <!-- <img src="img/flores_superior.png" width="350px" height="50%"> -->
         </div>
@@ -101,12 +105,38 @@
             <% } %>
         </div>
     </section>
+    <section id="loading">
+        <div class="lds-heart">
+            <div></div>
+        </div>
+    </section>
     <script>
+        function checarPagina() {
+            switch (document.readyState) {
+            case "loading":
+                console.log('Carregando')
+                // O documento esta carregando
+                break;
+            case "interactive":
+                console.log('Carregando')
+                    // O documento esta carregando
+                break;
+            case "complete":
+                document.querySelector('#main').style.display = 'block';
+                document.querySelector('#loading').style.display = 'none';
+                break;
+        }
+        }
+
+        setInterval(() => {
+            checarPagina();
+        }, 5);
+
         try {
             document.querySelector('#btn-confirmacao').addEventListener('click', () => {
             let id = document.querySelector('#id').value;
 
-            if (confirm('Para a a melhor organização da festa, pedimos por gentileza que confirme sua presença. Caso positivo, clique em ok.')) {
+            if (confirm('Para a melhor organização da festa, pedimos por gentileza que confirme sua presença. Caso positivo, clique em ok.')) {
                 let url = '/confirm';
                 let configuracao = {
                     method: 'post',
