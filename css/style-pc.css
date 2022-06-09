@@ -1,0 +1,279 @@
+* {
+    background-color: #ffffff;
+    margin: 0 auto;
+    padding-bottom: 0 !important;
+}
+
+@font-face {
+    font-family: nickainley;
+    src: url('fonts/Nickainley.ttf')  format('truetype');
+}
+
+@font-face {
+    font-family: allura;
+    src: url('fonts/Allura-Regular.ttf')  format('truetype');
+}
+
+@font-face {
+    font-family: arima-madurai;
+    src: url('fonts/arima-madurai.light.ttf')  format('truetype');
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.fade-in-image {
+        animation: fadeIn 5s;
+        /* -webkit-animation: fadeIn 5s;
+        -moz-animation: fadeIn 5s;
+        -o-animation: fadeIn 5s;
+        -ms-animation: fadeIn 5s; */
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { 
+            opacity: 1;
+            animation-play-state:paused;
+        }
+    }
+
+    /* @-moz-keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+
+    @-webkit-keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+
+    @-o-keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+    }
+
+    @-ms-keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+    } */
+
+#main {
+    /* margin-left: 50%; */
+    width: 50%;
+    /* height: 30px; */
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* min-height: 100vh; */
+    /* top: 50%; */
+    /* transform: translateY(-50%); */
+}
+
+#convite {
+    position: fixed; /* or absolute */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+}
+
+#flores-superior {
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    /* background-color: red; */
+    background-image: url("../img/flores_superior_1.png");
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-color: transparent;
+    width: 75%;
+    height: 60%;
+}
+
+#flores-inferior {
+    right: 0px;
+    bottom: 0px;
+    position: fixed;
+    background-image: url("../img/flores_inferior_1.png");
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-color: transparent;
+    background-position: bottom;
+    background-position-x: right;
+    width: 75%;
+    height: 60%;
+}
+
+#versiculo {
+    opacity: 0;
+    margin-top: 2%;
+    /* padding-top: 2%; */
+    position: relative;
+    /* font-size: 1.5vw; */
+    font-size: 1.5vw;
+    font-family: allura;
+    background-color: transparent;
+    animation-fill-mode: forwards;
+}
+
+#bencao_frase {
+    opacity: 0;
+    animation-delay: 1s;
+    margin-top: 3%;
+    font-size: 1.8vw;
+    font-family: arima-madurai;
+    background-color: transparent;
+    animation-fill-mode: forwards;
+}
+
+#pais {
+    opacity: 0;
+    animation-delay: 3s;
+    margin-top: 0.5%;
+    text-align: center;
+    position: relative;
+    font-size: 1.3vw;
+    font-family: arima-madurai;
+    background-color: transparent;
+    animation-fill-mode: forwards;
+}
+
+#deyse_ricardo {
+    opacity: 0;
+    margin-top: 0.5%;
+    animation-delay: 5s;
+    position: relative;
+    text-align: center;
+    /* font-size: 3vw; */
+    color: #8b55ff;
+    font-family: allura;
+    font-size: 7vw;
+    background-color: transparent;
+    animation-fill-mode: forwards;
+}
+
+#deyse_ricardo img {
+    width: 95%;
+    height: 65%;
+}
+
+#heart {
+    color: red;
+}
+
+#convidam_casamento {
+    opacity: 0;
+    margin-top: 0.5%;
+    animation-delay: 7s;
+    position: relative;
+    background-color: transparent;
+    animation-fill-mode: forwards;
+    color: #b6abca;
+    font-family: arima-madurai;
+    font-size: 1.8vw;
+    background-color: transparent;
+}
+
+#data {
+    opacity: 0;
+    margin-top: 0.5%;
+    animation-delay: 9s;
+    position: relative;
+    background-color: transparent;
+    animation-fill-mode: forwards;
+    font-family: allura;
+    font-size: 4vw;
+    color: #7a52db
+}
+
+#data img {
+    width: 85%;
+    height: 65%;
+}
+
+#endereco {
+    opacity: 0;
+    margin-top: 0.5%;
+    animation-delay: 11s;
+    position: relative;
+    background-color: transparent;
+    animation-fill-mode: forwards;
+    font-family: arima-madurai;
+    font-size: 1.5vw;
+}
+
+#endereco img {
+    width: 85%;
+    height: 65%;
+}
+
+#frase_confirmacao {
+    background-color: #8b55ff;
+    opacity: 0;
+    margin-top: 1.5%;
+    animation-delay: 15s;
+    position: relative;
+    animation-fill-mode: forwards;
+    text-align: center;
+    font-family: allura;
+    color: #fff;
+    border: 5px solid #8b55ff;
+    border-radius: 10px;
+}
+
+#frase_confirmacao:hover {
+    transform: scale(1.1);
+}
+
+#nome_convidado {
+    background-color: #8b55ff;
+    font-weight: bold;
+    font-size: 3vw;
+}
+
+#mensagem_presenca {
+    background-color: #8b55ff;
+    font-weight: bold;
+    font-size: 2vw;
+}
+
+#presenca_confirmada {
+    color: purple;
+    margin-top: 10px;
+    font-size: 2.5vw;
+    font-family: allura;
+}
+
+#deyse_ricardo_presenca_confirmada {
+    margin-top: 0.5%;
+    position: relative;
+    text-align: center;
+    /* font-size: 3vw; */
+    color: #8b55ff;
+    font-family: allura;
+    font-size: 7vw;
+    background-color: transparent;
+}
+
+#data_presenca_confirmada {
+    margin-top: 0.5%;
+    position: relative;
+    background-color: transparent;
+    font-family: allura;
+    font-size: 4vw;
+    color: #7a52db
+}
+
+#endereco_presensa_confirmada {
+    margin-top: 0.5%;
+    position: relative;
+    background-color: transparent;
+    font-family: arima-madurai;
+    font-size: 1.5vw;
+}

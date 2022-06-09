@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deyse & Ricardo</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="./css/style-pc.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="./css/style-mobile.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="./css/convidados.css" media="screen"/>
+</head>
+<body>
+    <section id="main">
+        <div id="flores-superior">
+            <!-- <img src="img/flores_superior.png" width="350px" height="50%"> -->
+        </div>
+
+        <div id="flores-inferior">
+            <!-- <img src="img/flores_inferior.png"> -->
+        </div>
+
+        <div id="convidados-div">
+          <% if (status) { %>
+              <%= status.error ? status.error : '' %>
+          <% } %>
+          <form id="insert-convidado" name="insert-convidado" method="post" action="/convidados" >
+            <input name="nome" id="convidado-nome" onfocusout="toUpper(this)" placeholder="Nome/Apelido" autocomplete="off" type="text">
+            <input name="sobrenome" id="convidado-sobrenome" onfocusout="toUpper(this)" placeholder="Sobrenome" autocomplete="off" type="text">
+            <input style="display: none" id="link" type="text">
+            <input type="submit" value="Cadastrar">
+          </form>
+          <br>
+            <table id="convidados">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Sobrenome</th>
+                  <th>Link</th>
+                  <th>Confirmação</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% data.guests.forEach(function(convidado, i) { %>
+                  <tr>
+                      <td><strong><%= convidado.nome %></strong></td>
+                      <td><%= convidado.sobrenome %></td>
+                      <td><button onclick="copiarLink('<%- convidado.link %>')">Copiar Link do Convite</button></td>
+                      <td><%= !convidado.confirmacao ? '' : 'SIM' %></td>
+                      <td><button onclick="deletar('<%- convidado.id %>')">Deletar</button></td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+        </div>
+    </section>
+    <script>
+      /** Transform to upper **/
+        function toUpper(e) {
+          e.value = e.value.toUpperCase();
+        }
+
+        function deletar(id) {
+          let url = '/convidados?' + document.cookie;
+
+          let configuracao = {
+              method: 'delete',
+              body: new URLSearchParams({
+                  'id': id,
+              })
+          }
+
+          fetch(url, configuracao)
+            .then((response) => {
+              return response.json()
+            })
+            .then((data) => {
+                if (data.success) {
+                  window.location = url;
+                }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+
+        function copiarLink(link) {
+          /* Get the text field */
+          const elem = document.createElement('textarea');
+          elem.value = 'http://' + window.location.host + link;
+          document.body.appendChild(elem);
+          elem.select();
+          document.execCommand('copy');
+          document.body.removeChild(elem);
+          // var copyText = document.getElementById("link");
+          // copyText.value = link;
+
+          // /* Select the text field */
+          // copyText.select();
+          // document.execCommand('copy');
+          // copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+          // /* Copy the text inside the text field */
+          // navigator.clipboard
+          //   .writeText(copyText.value)
+          //   .then(() => {
+          //     alert('Link copiado');
+          //   })
+          //   .catch((err) => { 
+          //     alert('Não foi possível copiar. Erro: ' + err);
+          //   })
+
+          alert('Copiado com sucesso');
+        }
+
+        document.querySelector('#insert-convidado').addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          let url = '/convidados?' + document.cookie;
+          let form = document.getElementById('insert-convidado');
+          form.action = url;
+          form.submit();
+        })
+    </script>
+</body>
+</html>

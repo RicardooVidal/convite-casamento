@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deyse & Ricardo</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="./css/style-pc.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="./css/style-mobile.css" media="screen"/>
+</head>
+<body>
+    <%
+        function primeiraParaMaiuscula(string) {
+            string = string.toLowerCase();
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+    %>
+    <section id="main">
+        <div id="flores-superior">
+            <!-- <img src="img/flores_superior.png" width="350px" height="50%"> -->
+        </div>
+
+        <div id="flores-inferior">
+            <!-- <img src="img/flores_inferior.png"> -->
+        </div>
+
+        <div id="convite">
+            <% if (response.nome != 0) { %>
+                <% if (response.confirmacao == 0) { %>
+                    <div class="fade-in-image" id="versiculo">
+                        <p>"Assim não são mais dois, mas uma só carne. Portanto, o que<br> Deus uniu o homem não separa"(Mateus 19.6)</p>
+                    </div>
+                
+                    <div class="fade-in-image" id="bencao_frase">
+                        <!-- <img src="img/bencao_frase.png"> -->
+                        <p>COM A BENÇÃO DE DEUS E SEUS PAIS</p>
+                    </div>
+            
+                    <div class="fade-in-image" id="pais">
+                        <div style="width: 50%; float:left">
+                            <p>Fidelcina da Cruz</p>
+                            Jurandir Batista
+                        </div>
+                        
+                        <div style="width: 50%; float:right">
+                            <p>Maria de Fátima</p>
+                            Rogério de Souza
+                        </div>
+                    </div>
+                    <br><br><br><br>
+                    <div class="fade-in-image" id="deyse_ricardo">
+                        <p>
+                            Deyse
+                            <span id="heart">♥</span>
+                            Ricardo
+                        </p>
+                    </div>
+            
+                    <div class="center fade-in-image" id="convidam_casamento">
+                        <p>CONVIDAM PARA SEU CASAMENTO</p>
+                    </div>
+            
+                    <div class="center fade-in-image" id="data">
+                        <p>25 de março de 2023 às 14 horas</p>
+                    </div>
+            
+                    <div class="center fade-in-image" id="endereco">
+                        <p>A realizar-se na Rua São Francisco, 101 - Condomínio Vida <br>Bela 1 - Vila Bela Flor, Mogi das Cruzes - SP</p>
+                    </div>
+                    <br><br>
+                    <a id="btn-confirmacao" href="#">
+                        <div class="center fade-in-image" id="frase_confirmacao">
+                            <span id="nome_convidado"><%= primeiraParaMaiuscula(response.nome) %></span>
+                            <span id="mensagem_presenca">, clique aqui para confirmar sua presença</span>
+                        </div>
+                    </a>
+                    <input id="id" type="hidden" value="<%= response.id %>">
+                <% } else { %>
+                    <div id="deyse_ricardo_presenca_confirmada">
+                        <p>
+                            Deyse
+                            <span id="heart">♥</span>
+                            Ricardo
+                        </p>
+                    </div>
+                    <div id="data_presenca_confirmada">
+                        <p>25 de março de 2023 às 14 horas</p>
+                    </div>
+            
+                    <div id="endereco_presensa_confirmada">
+                        <p>A realizar-se na Rua São Francisco, 101 - Condomínio Vida <br>Bela 1 - Vila Bela Flor, Mogi das Cruzes - SP</p>
+                    </div>
+                    <div id="presenca_confirmada">
+                        <p><%= primeiraParaMaiuscula(response.nome) %>, obrigado por confirmar! ;)</p>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <p>Convite inexistente ou inválido</p>
+            <% } %>
+        </div>
+    </section>
+    <script>
+        try {
+            document.querySelector('#btn-confirmacao').addEventListener('click', () => {
+            let id = document.querySelector('#id').value;
+
+            if (confirm('Para a a melhor organização da festa, pedimos por gentileza que confirme sua presença. Caso positivo, clique em ok.')) {
+                let url = '/confirm';
+                let configuracao = {
+                    method: 'post',
+                    body: new URLSearchParams({
+                        'id': id
+                    })
+                }
+
+                fetch(url, configuracao)
+                    .then((response) => {
+                        return response.json();
+                    })
+                    .then((data) => {
+                        if (data.success) {
+                            alert('Obrigado por confirmar!');
+                            location.reload();
+                        }
+                    });
+            }
+        })
+        } catch (err) {
+
+        }
+    </script>
+</body>
+</html>

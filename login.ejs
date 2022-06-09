@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deyse & Ricardo</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="./css/style-pc.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="./css/style-mobile.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="./css/login.css" media="screen"/>
+</head>
+<body>
+    <section id="main">
+        <div id="flores-superior">
+            <!-- <img src="img/flores_superior.png" width="350px" height="50%"> -->
+        </div>
+
+        <div id="flores-inferior">
+            <!-- <img src="img/flores_inferior.png"> -->
+        </div>
+
+        <form id="login" action="/convidados" method="get">
+            <div id="login">
+                <input type="text" id="login-input" name="login" placeholder="Login" value="">
+        
+                <input type="password" id="password-input" name="password" placeholder="Senha" value="">
+                
+                <input type="submit" value="Login">
+            </div>
+        </form>
+    </section>
+    <script>
+        document.querySelector('input[type=submit]').addEventListener('click', function(e) {
+            e.preventDefault();
+            var form = document.querySelector('#login');
+
+            let login = document.querySelector('#login-input').value;
+            let password = document.querySelector('#password-input').value;
+            
+            let url = '/login';
+            let configuracao = {
+                method: 'post',
+                body: new URLSearchParams({
+                    'login': login,
+                    'password': password
+                })
+            }
+
+            fetch(url, configuracao)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    //Guardar token no cookie
+                    if(data.token) {
+                        document.cookie = 'token=' + data.token + ';SameSite=Lax';
+                        window.location = '/convidados?token=' + data.token;
+                    }
+                });
+        });
+    </script>
+</body>
+</html>
